@@ -1,0 +1,1 @@
+web: gunicorn pyyur.wsgi --log-file -
