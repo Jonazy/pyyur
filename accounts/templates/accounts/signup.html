@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        {% block content %}
+            <div class="account-container" id="container">
+                <div class="form-container sign-in-container">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h1>Create Account</h1><br>
+                        <div>
+                            {% for error in signup_form.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <p style="margin: 6px;">enter your details below</p>
+                        <input class="input" type="text" value="{{ signup_data.first_name }}" name="first_name" placeholder="First Name" />
+                        <input class="input" type="text" value="{{ signup_data.last_name }}" name="last_name" placeholder="Last Name" />
+                        <input class="input" type="email" value="{{ signup_data.email }}" name="email" placeholder="Email" />
+                        <input class="input" type="password" name="password" placeholder="Password" />
+                        <input class="input" type="password" name="confirm_password" placeholder="Confirm Password" />
+                        <br><div class="form-check">
+<!--                          <input class="form-check-input" type="checkbox" value="is_artist" id="flexCheckChecked">-->
+                        <input class="form-check-input" name="user_type" type="text" value="is_artist" hidden>
+                          <label class="form-check-label" for="flexCheckChecked">
+                            <big>I'm a sponsor? <small>Yes</small></big>
+                          </label>
+                        </div><br>
+
+                        <button>Sign Up</button>
+                    </form>
+                </div>
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-right">
+                            <h1>First time here?</h1>
+                            <p>Provide in your details and get started.<br><br>
+                                <b>Note:</b> Kindly check "I'm a sponsor" only if your are here to provide
+                                sponsorship for our talents.</p>
+                            <small>or</small>
+                            <p>To keep connected with us please
+                                <a href="{% url 'login' %}" style="color: white; size: 20px; text-decoration: underline"><b>Sign In</b></a> with your personal info.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endblock %}
+
+    </body>
+</html>
+

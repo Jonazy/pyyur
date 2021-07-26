@@ -26,35 +26,47 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.first_name + '-' + self.last_name
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name_plural = 'Users'
+        verbose_name = 'User'
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.email)
+            self.slug = slugify(self.first_name + '-' + self.last_name)
         return super().save(*args, **kwargs)
 
 
-class Artist(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(to=CustomUser, related_name="artist", primary_key=True, on_delete=models.CASCADE)
+    brand_name = models.CharField(max_length=100)
     phone_number = models.IntegerField(null=True)
     date_of_birth = models.DateField(null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
-    _link = models.CharField(max_length=255, blank=True, null=True)
-    facebook_link = models.CharField(max_length=255, blank=True, null=True)
-    picture = models.ImageField(upload_to='images')
-    state = models.CharField(max_length=200, blank=True)
+    web_link = models.URLField(max_length=255, blank=True, null=True)
+    zip_code = models.SmallIntegerField(null=True)
     city = models.CharField(max_length=200, blank=True)
+    state = models.CharField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
+    brand_logo = models.ImageField(upload_to='images')
+    company_documents = models.FileField(upload_to='images')
+    facebook_link = models.URLField(max_length=255, blank=True, null=True)
+    instagram_link = models.URLField(max_length=255, blank=True, null=True)
+    twitter_link = models.URLField(max_length=255, blank=True, null=True)
+    LinkedIn_link = models.URLField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.user
 
 
 @receiver(post_save, sender=CustomUser)
 def create_user_profile(sender, instance, created, **kwargs):
-    # if created:
-    #     Artist.objects.create(user=instance)
     try:
         instance.artist.save()
     except ObjectDoesNotExist:
-        Artist.objects.create(user=instance)
+        Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=CustomUser)
