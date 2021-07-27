@@ -1,0 +1,55 @@
+{% extends 'show/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<title>{% block title %} Shows {% endblock %}</title>
+
+
+{% block content %}
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">All Shows</h1>
+        <p class="lead text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard
+        dummy text ever since the 1500s, when an unknown
+        printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p>
+          <a href="{% url 'add-show' %}" class="btn btn-primary my-2">Create New Show</a>
+          <a href="{% url 'venues' %}" class="btn btn-secondary my-2">View show by Venue</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for show in show_listings %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{ show.photo.url }}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" focusable="false" preserveAspectRatio="xMidYMid slice" ><rect width="100%" height="100%" fill="#55595c"/>
+            <div class="card-body">
+              <h4 class="card-text">{{ show.name }} </h4><span>Artist / {{ show.artists }}</span><br>
+              <br><p class="card-text"> Venue at /<b> {{ show.venue }}</b><br>
+              Date & Time at /<b> {{ show.show_time }}</b></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Details</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Participate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
+
+{% endblock %}

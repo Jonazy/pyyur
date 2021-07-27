@@ -1,0 +1,15 @@
+{% extends 'base_core.html' %}
+{% load static %}
+
+{% block content %}
+<header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0"><img style="width: 35px;" src="{% static 'media/pyyur_logo.png' %}"> <b> <b> </b>Fyyur</b></h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" aria-current="page" href="#">Artist</a>
+        <a class="nav-link" href="{% url 'shows' %}">Show</a>
+        <a class="nav-link" href="{% url 'venues' %}">Venue</a>
+      </nav>
+    </div>
+  </header>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'venue/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<title>{% block title %} Venues {% endblock %}</title>
+
+
+{% block content %}
+<main>
+  <div class="b-example-divider"></div>
+
+  <div class="container px-4 py-5" id="hanging-icons">
+      <a href="#" class="btn btn-secondary">
+            Home page
+          </a> <br>
+   <br> <h2 class="pb-2 border-bottom">All Venues</h2>
+       <div>
+            <a href="{% url 'add-venue' %}" class="btn btn-primary">
+            Add New Venue
+          </a>
+        </div>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+
+        {% for venue in venue_listings %}
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+        </div>
+        <div>
+          <h4>{{venue.name}}</h4>
+            <p>City / <b>{{venue.city}}</b></p>
+            <p>State / <b>{{venue.state}}</b></p>
+            <p>Country / <b>{{venue.country}}</b></p>
+            <p>Address / <b>{{venue.address}}</b></p>
+            <p>Contact Number / <b>{{venue.telephone}}</b></p>
+          <a href="#" class="btn btn-primary">
+            Venue Details
+          </a>
+        </div>
+
+      </div>
+        {% endfor %}
+    </div>
+  </div>
+
+  <div class="b-example-divider"></div>
+</main>
+
+{% endblock %}
