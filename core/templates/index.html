@@ -3,21 +3,27 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-{% include "_header.html" %}
+<div class="container-fluid">
+  {% include "_header.html" %}
 
-  <main class="px-3">
-    <h1>Fyyur is with friend!</h1>
-    <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard, has been the industry's standard. has been the industry's standard</p>
-    <p class="lead">
-      <a href="{% url 'signup' %}" class="btn btn-lg btn-secondary fw-bold border-white bg-white"> Sign Up </a>
-      <a href="{% url 'signup' %}" class="btn btn-lg btn-secondary fw-bold border-white bg-white"> Log In </a>
-    </p>
-  </main>
-  <footer class="mt-auto text-white-50">
-    <p>Fyyur <a href="https://fyyur.com/" class="text-white"></a>&copy; 2021</p>
-  </footer>
+
+  <main class="flex-shrink-0">
+  <div class="container" style="width: 60%">
+    <h1 class="mt-5">Fyyur is not Lorem dummy</h1>
+    <p class="lead mt-4">Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry.
+      Lorem Ipsum has been the industry's standard, has
+      been the industry's standard. has been the industry's standard</p>
+    <p>Here <a href="#">All you need to get started with Fyyur</a> if need be.</p>
+  </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+
+    <span class="text-muted"><p>Fyyur <a href="https://fyyur.com/" class="text-white"></a>&copy; 2021</p></span>
+  </div>
+</footer>
+
 </div>
-
 {% endblock %}

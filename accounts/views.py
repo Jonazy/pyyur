@@ -1,22 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
-from . forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm
 
 
 # Create your views here.
 
 # Landing page function
-
-def home(request):
-    template_name = 'accounts/index.html'
-    if request.method == 'GET':
-        context = {
-
-        }
-        return render(request, template_name, context)
-
 
 def signup(request):
     context = {
@@ -63,3 +54,11 @@ def Signin(request):
         "signup_data": request.POST
     }
     return render(request, template_name, context)
+
+
+def user_logout(request):
+    template_name = 'accounts/login.html'
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect('login')
+

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .models import Venue, Show
+from .models import Venue, Show, CustomUser
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from .forms import VenueForm, ShowForm
@@ -19,11 +19,24 @@ def home(request):
         return render(request, template_name, context)
 
 
+class ArtistListView(generic.ListView):
+    model = CustomUser
+    queryset = CustomUser.objects.all()
+    context_object_name = 'artist_listings'
+    template_name = 'user/user_list.html'
+
+
 class ShowListView(generic.ListView):
     model = Show
     queryset = Show.objects.all()
     context_object_name = 'show_listings'
     template_name = 'show/show_list.html'
+
+
+class ShowDetailView(generic.DetailView):
+    model = Show
+    context_object_name = 'show_detail'
+    template_name = 'show/show_detail.html'
 
 
 class ShowCreateView(generic.CreateView):
